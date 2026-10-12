@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PPC Waste Detector Audit Report — {{ audit.summary.audit_id }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+    body { font-family: 'Inter', sans-serif; background-color: #090d16; color: #f1f5f9; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="min-h-screen pb-16">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center font-extrabold text-white text-xl shadow-lg shadow-rose-500/20">
+          💸
+        </div>
+        <div>
+          <h1 class="text-lg font-bold text-white flex items-center gap-2">
+            PPC Waste Detector <span class="text-xs px-2 py-0.5 rounded bg-slate-800 text-rose-400 font-mono border border-slate-700">v0.1.0</span>
+          </h1>
+          <p class="text-xs text-slate-400">Google Ads & Meta Ads Budget Leak Audit</p>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 text-xs font-mono text-slate-400">
+        <span class="hidden sm:inline">Audit ID: <span class="text-slate-200">{{ audit.summary.audit_id }}</span></span>
+        <span class="px-2.5 py-1 rounded-full bg-slate-800 text-slate-300 border border-slate-700">
+          🕒 {{ audit.summary.timestamp[:19] }}
+        </span>
+      </div>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 pt-8 space-y-8">
+
+    <!-- KPI & Score Cards -->
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+
+      <!-- Efficiency Score Gauge -->
+      <div class="lg:col-span-1 p-6 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 border border-slate-800 flex flex-col items-center justify-center text-center relative overflow-hidden shadow-xl">
+        <div class="text-xs font-semibold tracking-wider text-slate-400 uppercase mb-2">PPC Capital Efficiency</div>
+        <div class="relative flex items-center justify-center w-36 h-36">
+          <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" stroke="#1e293b" stroke-width="8" fill="none" />
+            <circle cx="50" cy="50" r="40" 
+              stroke="{% if audit.summary.efficiency_score >= 80 %}#10b981{% elif audit.summary.efficiency_score >= 60 %}#f59e0b{% else %}#ef4444{% endif %}" 
+              stroke-width="8" 
+              stroke-linecap="round"
+              stroke-dasharray="251.2" 
+              stroke-dashoffset="{{ 251.2 * (1.0 - audit.summary.efficiency_score / 100.0) }}" 
+              fill="none" 
+              class="transition-all duration-1000 ease-out" />
+          </svg>
+          <div class="absolute inset-0 flex flex-col items-center justify-center">
+            <span class="text-4xl font-extrabold {% if audit.summary.efficiency_score >= 80 %}text-emerald-400{% elif audit.summary.efficiency_score >= 60 %}text-amber-400{% else %}text-rose-400{% endif %}">
+              {{ audit.summary.efficiency_score }}%
+            </span>
+            <span class="text-[10px] text-slate-400 uppercase tracking-widest">Efficiency</span>
+          </div>
+        </div>
+        <div class="mt-4 text-xs text-slate-400">
+          Waste Rate: <strong class="text-rose-400 font-mono">{{ audit.summary.waste_percentage }}%</strong> of Total Ad Spend
+        </div>
+      </div>
+
+      <!-- Financial Metric Cards -->
+      <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-4">
+
+        <div class="p-5 rounded-xl bg-slate-900/60 border border-slate-800 flex flex-col justify-between">
+          <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Total Ad Spend Audited</div>
+          <div class="text-3xl font-extrabold text-white mt-2 font-mono">
+            ${{ "{:,.2f}".format(audit.summary.total_spend_analyzed) }}
+          </div>
+          <div class="text-xs text-slate-500 mt-2 font-mono">Analyzed across search & display</div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-rose-950/20 border border-rose-500/30 flex flex-col justify-between">
+          <div class="text-xs font-medium text-rose-400 uppercase tracking-wider">Identified Budget Waste</div>
+          <div class="text-3xl font-extrabold text-rose-400 mt-2 font-mono">
+            ${{ "{:,.2f}".format(audit.summary.total_wasted_spend) }}
+          </div>
+          <div class="text-xs text-rose-300/70 mt-2">Zero-conversion capital drain</div>
+        </div>
+
+        <div class="p-5 rounded-xl bg-emerald-950/20 border border-emerald-500/30 flex flex-col justify-between">
+          <div class="text-xs font-medium text-emerald-400 uppercase tracking-wider">Annualized Reclaim Potential</div>
+          <div class="text-3xl font-extrabold text-emerald-400 mt-2 font-mono">
+            ${{ "{:,.2f}".format(audit.summary.total_wasted_spend * 12) }}
+          </div>
+          <div class="text-xs text-emerald-300/70 mt-2">Projected 12-month capital savings</div>
+        </div>
+
+        <!-- Severity Breakdown Row -->
+        <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-800 flex items-center justify-between">
+          <span class="text-xs text-rose-400 font-semibold">Critical Leaks</span>
+          <span class="font-mono font-bold text-rose-400 text-lg">{{ audit.summary.critical_findings }}</span>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-800 flex items-center justify-between">
+          <span class="text-xs text-orange-400 font-semibold">High Priority</span>
+          <span class="font-mono font-bold text-orange-400 text-lg">{{ audit.summary.high_findings }}</span>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900/40 border border-slate-800 flex items-center justify-between">
+          <span class="text-xs text-amber-400 font-semibold">Medium / Low</span>
+          <span class="font-mono font-bold text-amber-400 text-lg">{{ audit.summary.medium_findings + audit.summary.low_findings }}</span>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Quick Exclusions Callout -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>🛑 Negative Keyword Candidates ({{ audit.negative_keyword_candidates | length }})</span>
+          </h3>
+          <span class="text-[11px] text-emerald-400 font-mono">Ready to upload</span>
+        </div>
+        <p class="text-xs text-slate-400">Search terms with zero conversions and non-commercial intent:</p>
+        <div class="flex flex-wrap gap-1.5 pt-2">
+          {% for kw in audit.negative_keyword_candidates[:10] %}
+            <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-rose-300 border border-slate-700 font-mono">
+              [{{ kw }}]
+            </span>
+          {% endfor %}
+          {% if audit.negative_keyword_candidates | length > 10 %}
+            <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400 font-mono">+{{ audit.negative_keyword_candidates | length - 10 }} more</span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="p-5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-sm font-bold text-white flex items-center gap-2">
+            <span>📱 Placement Exclusion Candidates ({{ audit.placement_exclusion_candidates | length }})</span>
+          </h3>
+          <span class="text-[11px] text-rose-400 font-mono">Mobile games & MFA</span>
+        </div>
+        <p class="text-xs text-slate-400">Display and PMax placements with accidental click drain:</p>
+        <div class="flex flex-wrap gap-1.5 pt-2">
+          {% for pl in audit.placement_exclusion_candidates[:8] %}
+            <span class="text-xs px-2.5 py-1 rounded bg-slate-800 text-amber-300 border border-slate-700 font-mono truncate max-w-xs">
+              {{ pl }}
+            </span>
+          {% endfor %}
+          {% if audit.placement_exclusion_candidates | length > 8 %}
+            <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400 font-mono">+{{ audit.placement_exclusion_candidates | length - 8 }} more</span>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- Detailed Findings Table -->
+    <section class="space-y-4">
+      <div class="flex items-center justify-between">
+        <h2 class="text-base font-bold text-white flex items-center gap-2">
+          <span>📋 All Identified Budget Leaks ({{ audit.findings | length }})</span>
+        </h2>
+        <span class="text-xs text-slate-400">Ranked by wasted spend and severity</span>
+      </div>
+
+      <div class="overflow-x-auto rounded-xl border border-slate-800 bg-slate-900/60 shadow-xl">
+        <table class="w-full text-left text-xs text-slate-300">
+          <thead class="bg-slate-950 text-slate-400 uppercase font-mono text-[10px] border-b border-slate-800">
+            <tr>
+              <th class="py-3 px-4">Severity</th>
+              <th class="py-3 px-4">Category</th>
+              <th class="py-3 px-4">Entity / Term</th>
+              <th class="py-3 px-4">Campaign</th>
+              <th class="py-3 px-4 text-right">Wasted Spend</th>
+              <th class="py-3 px-4 text-right">Clicks</th>
+              <th class="py-3 px-4">Evidence</th>
+              <th class="py-3 px-4">Action Required</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-800/60">
+            {% for f in audit.findings %}
+            <tr class="hover:bg-slate-800/40 transition">
+              <td class="py-3 px-4 whitespace-nowrap">
+                <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase font-mono
+                  {% if f.severity == 'critical' %}bg-rose-500/20 text-rose-400 border border-rose-500/30
+                  {% elif f.severity == 'high' %}bg-orange-500/20 text-orange-400 border border-orange-500/30
+                  {% elif f.severity == 'medium' %}bg-amber-500/20 text-amber-400 border border-amber-500/30
+                  {% else %}bg-slate-500/20 text-slate-400 border border-slate-500/30{% endif %}">
+                  {{ f.severity }}
+                </span>
+              </td>
+              <td class="py-3 px-4 font-mono text-slate-400 whitespace-nowrap uppercase text-[10px]">
+                {{ f.category | replace('_', ' ') }}
+              </td>
+              <td class="py-3 px-4 font-semibold text-slate-200 max-w-xs truncate" title="{{ f.entity }}">
+                {{ f.entity }}
+              </td>
+              <td class="py-3 px-4 text-slate-400 max-w-xs truncate" title="{{ f.campaign }}">
+                {{ f.campaign }}
+              </td>
+              <td class="py-3 px-4 text-right font-mono font-bold text-rose-400 whitespace-nowrap">
+                ${{ "{:,.2f}".format(f.wasted_spend) }}
+              </td>
+              <td class="py-3 px-4 text-right font-mono text-slate-300">
+                {{ f.clicks }}
+              </td>
+              <td class="py-3 px-4 text-slate-400 max-w-sm font-mono text-[11px]">
+                {{ f.evidence }}
+              </td>
+              <td class="py-3 px-4 text-emerald-400 max-w-sm text-[11px]">
+                {{ f.proposed_action }}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="mt-16 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
+    Generated by <strong class="text-slate-400">PPC Waste Detector</strong> — Free Open-Source Ad Spend Optimization Platform.
+  </footer>
+
+</body>
+</html>
