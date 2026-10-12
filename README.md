@@ -5,6 +5,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000.svg)](https://github.com/astral-sh/ruff)
 [![Type checked: mypy](https://img.shields.io/badge/type%20checked-mypy-blue.svg)](http://mypy-lang.org/)
+[![Hire Me: PPC Audits](https://img.shields.io/badge/Hire%20Me-PPC%20Audit%20%26%20Consulting-2ea44f?style=flat-square&logo=googlechrome&logoColor=white)](https://abouthamid.web.app/)
+[![Connect on LinkedIn](https://img.shields.io/badge/LinkedIn-Muhammad%20Hamid-0077b5?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/muhammad-hamid-digital-marketing/)
+[![Direct Email](https://img.shields.io/badge/Email-mhamidlad%40gmail.com-red?style=flat-square&logo=gmail&logoColor=white)](mailto:mhamidlad@gmail.com)
 
 > **A production-grade, open-source PPC budget leak detector for Google Ads and Meta Ads.**  
 > Automatically detects search query bleed, internal keyword cannibalization, junk mobile app placements, geo-location bleed, off-hour dayparting spikes, and runaway smart bidding CPC anomalies. Generates one-click exclusion lists for **Google Ads Editor** and self-contained interactive Tailwind CSS audit dashboards.
@@ -198,7 +201,41 @@ This project is licensed under the [MIT License](LICENSE) - see the LICENSE file
 
 ---
 
-## 👤 Author & Support
+## 💼 Done-For-You PPC Audits & Enterprise Growth Consulting
+
+> **Stop bleeding ad budget.** If your business spends **\$10,000 to \$500,000+/month** on Google Ads or Meta Ads, undetected broad-match leaks, bot placements, and cross-campaign cannibalization quietly drain **15% to 35%** of your ad investment.
+
+As a **Digital Marketing Head with 7+ years of experience** leading performance marketing for healthcare networks, BPOs, and high-growth e-commerce brands across the US, UK, and international markets, I help brands and agencies reclaim wasted spend and scale profitably.
+
+### 🎯 Engagement Options
+
+| Service Tier | Best For | What's Included | Typical Impact |
+|---|---|---|---|
+| **🔍 Forensic PPC Waste Audit** | Brands spending \$10k–\$100k/mo | Full forensic review of search queries, cannibalization, PMax placements, dayparting, bidding anomalies + prioritized 30-day remediation roadmap | Reclaims **\$2,500–\$15,000/mo** in wasted ad spend within 14 days |
+| **⚙️ Custom Enterprise Automation** | Agencies & multi-account brands | Automated negative keyword sync pipelines, custom Python connectors to BigQuery/Snowflake, automated Slack alert bots | Zero manual query scrubbing; real-time leak prevention across 50+ accounts |
+| **👑 Fractional Head of Paid Media / CMO** | Scale-ups & growing enterprises | Full-funnel paid acquisition strategy across Google, Meta & TikTok Ads, team leadership, budget allocation & ROAS scaling | Reduced customer acquisition cost (CAC) by up to **70%**, predictable revenue growth |
+
+---
+
+### 🚀 Ready to Stop Ad Waste?
+
+Let's review your account and build an automated leak-prevention system:
+
+- 🌐 **Portfolio & Case Studies**: [abouthamid.web.app](https://abouthamid.web.app/)
+- 💼 **LinkedIn Profile**: [linkedin.com/in/muhammad-hamid-digital-marketing](https://www.linkedin.com/in/muhammad-hamid-digital-marketing/)
+- 📩 **Direct Business Email**: [`mhamidlad@gmail.com`](mailto:mhamidlad@gmail.com)
+- 📅 **Book a 1-on-1 Strategy Session**: [Schedule Discovery Call](https://abouthamid.web.app/)
+
+<p align="center">
+  <a href="https://abouthamid.web.app/"><img src="https://img.shields.io/badge/Book%20PPC%20Audit-abouthamid.web.app-2ea44f?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Book Audit"></a>
+  <a href="https://www.linkedin.com/in/muhammad-hamid-digital-marketing/"><img src="https://img.shields.io/badge/LinkedIn-Muhammad%20Hamid-0077b5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
+  <a href="mailto:mhamidlad@gmail.com"><img src="https://img.shields.io/badge/Email-mhamidlad%40gmail.com-red?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"></a>
+</p>
+
+---
+
+## 👤 Author & Open Source Community
 
 Created and maintained by **Muhammad Hamid** ([@hamid-digitalmarketer](https://github.com/hamid-digitalmarketer)).  
 Found a bug or have an idea for a new leak detector? Open an [issue](https://github.com/hamid-digitalmarketer/ppc-waste-detector/issues) or submit a pull request!
+

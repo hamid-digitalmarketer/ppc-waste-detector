@@ -38,3 +38,5 @@ reports/*.txt
 .idea/
 .DS_Store
 Thumbs.db
+
+reports_ci/
