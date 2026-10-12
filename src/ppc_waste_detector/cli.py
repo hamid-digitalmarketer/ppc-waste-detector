@@ -15,8 +15,8 @@ from rich.console import Console
 from rich.panel import Panel
 from rich.table import Table
 
-from data.loader import load_geo_hourly, load_placements, load_search_queries
 from ppc_waste_detector import __version__
+from ppc_waste_detector.data.loader import load_geo_hourly, load_placements, load_search_queries
 from ppc_waste_detector.detectors import (
     detect_dayparting_waste,
     detect_geo_bleed,
@@ -59,15 +59,16 @@ def audit(
         None, "--geo-hourly", "-g", help="Path to Geographic & Hourly Dayparting CSV export"
     ),
     output_dir: Path = typer.Option(
-        Path("./reports"), "--output-dir", "-o", help="Target directory for generated audit reports"
+        Path("./reports"), "--output-dir", "--out-dir", "-o", help="Target directory for generated audit reports"
     ),
     save_to_db: bool = typer.Option(
         True, "--save-db/--no-save-db", help="Persist audit results to local SQLite database"
     ),
 ) -> None:
     """Run full PPC budget waste audit across search queries, display placements, and dayparting."""
-    # Use default sample data if no inputs are supplied
-    default_dir = Path(__file__).parent.parent.parent / "data" / "sample_data"
+    package_data_dir = Path(__file__).parent / "data" / "sample_data"
+    root_data_dir = Path(__file__).parent.parent.parent / "data" / "sample_data"
+    default_dir = package_data_dir if package_data_dir.exists() else root_data_dir
     sq_file = search_queries or (default_dir / "google_search_queries.csv")
     pl_file = placements or (default_dir / "display_placement_performance.csv")
     gh_file = geo_hourly or (default_dir / "geo_hourly_performance.csv")
